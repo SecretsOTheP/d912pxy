@@ -70,9 +70,9 @@ public:
 	void UploadSurfaceData(d912pxy_upload_item* ul, UINT lv, ID3D12GraphicsCommandList* cl);
 	void DelayedLoad(void* mem, UINT lv);
 	
-	size_t GetFootprintMemSz();
-	size_t GetFootprintMemSzRaw();
-	size_t GetFootprintMemSzDX9();
+	UINT64 GetFootprintMemSz();
+	UINT64 GetFootprintMemSzRaw();
+	UINT64 GetFootprintMemSzDX9();
 	UINT GetWPitchDX9(UINT lv);
 	UINT GetWPitchLV(UINT lv);
 	UINT FixBlockHeight(UINT lv);
@@ -113,7 +113,7 @@ private:
 	
 	d912pxy_surface_layer** layers;
 	D3D12_PLACED_SUBRESOURCE_FOOTPRINT* subresFootprints;
-	size_t subresSizes;
+	UINT64 subresSizes;
 	UINT subresCountCache;	
 
 	UINT ulMarked;

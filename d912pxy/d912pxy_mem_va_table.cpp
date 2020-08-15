@@ -34,7 +34,7 @@ d912pxy_mem_va_table::~d912pxy_mem_va_table()
 	
 }
 
-void d912pxy_mem_va_table::Init(UINT64* objSizes, UINT64 allocBitSize, UINT64 entryCount)
+void d912pxy_mem_va_table::Init(UINT* objSizes, UINT allocBitSize, UINT entryCount)
 {
 	NonCom_Init(L"mem_va_table");
 
@@ -43,7 +43,7 @@ void d912pxy_mem_va_table::Init(UINT64* objSizes, UINT64 allocBitSize, UINT64 en
 		LOG_ERR_THROW2(-1, "VA table allocation size is too small");
 	}
 
-	UINT64 pageSz = d912pxy_s.mem.GetPageSize();
+	UINT pageSz = d912pxy_s.mem.GetPageSize();
 
 	m_entryCount = entryCount;
 
@@ -55,7 +55,7 @@ void d912pxy_mem_va_table::Init(UINT64* objSizes, UINT64 allocBitSize, UINT64 en
 
 	LOG_DBG_DTDM3("Marking up %u Mb by %u Mb groups", 1ULL << (allocBitSize - 20), entryBase >> 20);
 
-	UINT64 manageRegionSz = 0;
+	UINT manageRegionSz = 0;
 
 	for (int i = 0; i != entryCount; ++i)
 	{
@@ -146,7 +146,7 @@ UINT __round_to_pow2up(UINT32 v)
 	return v;
 }
 
-void * d912pxy_mem_va_table::AllocateObjPow2(UINT64 size)
+void * d912pxy_mem_va_table::AllocateObjPow2(UINT size)
 {
 	size = size >> PXY_INNER_MIN_POW2_ALLOC_POW;
 
@@ -161,9 +161,9 @@ void * d912pxy_mem_va_table::AllocateObjPow2(UINT64 size)
 	return AllocateObj(size);
 }
 
-void * d912pxy_mem_va_table::AllocateObj(UINT64 type)
+void * d912pxy_mem_va_table::AllocateObj(UINT type)
 {	
-	UINT64 groupBase = baseAdr + type * entryBase;
+	UINT groupBase = baseAdr + type * entryBase;
 
 	lock[type].Hold();
 
@@ -178,7 +178,7 @@ void * d912pxy_mem_va_table::AllocateObj(UINT64 type)
 
 	intptr_t ret = objId * table[type].itemSize;
 
-	UINT64 refId = ret / table[type].allocGrain;
+	UINT refId = ret / table[type].allocGrain;
 
 	d912pxy_mem_va_table_ref_counter refs = ++table[type].refBase[refId];
 
@@ -193,10 +193,10 @@ void * d912pxy_mem_va_table::AllocateObj(UINT64 type)
 
 void d912pxy_mem_va_table::DeAllocateObj(void * obj)
 {
-	UINT64 type = TypeFromAdr(obj);
-	UINT64 objAdr = (intptr_t)obj & objMask;
+	UINT type = TypeFromAdr(obj);
+	UINT objAdr = (intptr_t)obj & objMask;
 	d912pxy_mem_va_table_obj_id objID = (UINT32)(objAdr / table[type].itemSize);	
-	UINT64 refId = objAdr / table[type].allocGrain;
+	UINT refId = objAdr / table[type].allocGrain;
 
 	lock[type].Hold();
 
@@ -209,7 +209,7 @@ void d912pxy_mem_va_table::DeAllocateObj(void * obj)
 	lock[type].Release();
 }
 
-UINT64 d912pxy_mem_va_table::TypeFromAdr(void * obj)
+UINT d912pxy_mem_va_table::TypeFromAdr(void * obj)
 {
 	return ((intptr_t)obj & baseMask) >> objShift;
 }
@@ -219,12 +219,12 @@ d912pxy_mem_va_table_obj_id d912pxy_mem_va_table::ObjIdFromAdr(void * obj)
 	return ObjIdFromAdr2(obj, TypeFromAdr(obj));
 }
 
-d912pxy_mem_va_table_obj_id d912pxy_mem_va_table::ObjIdFromAdr2(void * obj, UINT64 type)
+d912pxy_mem_va_table_obj_id d912pxy_mem_va_table::ObjIdFromAdr2(void * obj, UINT type)
 {
 	return (d912pxy_mem_va_table_obj_id)(((intptr_t)obj & objMask) / table[type].itemSize);
 }
 
-void * d912pxy_mem_va_table::GetObj(UINT64 type, d912pxy_mem_va_table_obj_id id)
+void * d912pxy_mem_va_table::GetObj(UINT type, d912pxy_mem_va_table_obj_id id)
 {
 	intptr_t groupBase = baseAdr + type * entryBase;
 

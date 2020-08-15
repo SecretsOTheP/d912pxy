@@ -167,44 +167,44 @@ d912pxy_upload_item::~d912pxy_upload_item()
 
 }
 
-void d912pxy_upload_item::UploadBlockWrite(UINT64 dst_offset, UINT64 upload_offset, UINT64 sz, void * src)
+void d912pxy_upload_item::UploadBlockWrite(UINT64 dst_offset, UINT64 upload_offset, UINT sz, void * src)
 {
 	memcpy((void*)DPtrOffset(upload_offset + dst_offset), (void*)((intptr_t)src + dst_offset), sz);
 }
 
-void d912pxy_upload_item::UploadBlock(ID3D12Resource * res, UINT64 block_offset, UINT64 upload_offset, UINT64 sz, void * src, ID3D12GraphicsCommandList * cl)
+void d912pxy_upload_item::UploadBlock(ID3D12Resource * res, UINT64 block_offset, UINT64 upload_offset, UINT sz, void * src, ID3D12GraphicsCommandList * cl)
 {
 	UploadBlockWrite(block_offset, upload_offset, sz, src);
 	cl->CopyBufferRegion(res, block_offset, mRes, upload_offset + block_offset, sz);
 }
 
-void d912pxy_upload_item::UploadTargetWithOffset(ID3D12Resource * res, UINT64 sofs, UINT64 dofs, UINT64 sz, void* src, ID3D12GraphicsCommandList * cl)
+void d912pxy_upload_item::UploadTargetWithOffset(ID3D12Resource * res, UINT sofs, UINT dofs, UINT sz, void* src, ID3D12GraphicsCommandList * cl)
 {
 	memcpy((void*)DPtrOffset(usedSpace), (void*)((intptr_t)src + sofs), sz);
 	cl->CopyBufferRegion(res, dofs, mRes, usedSpace, sz);
 	usedSpace += sz;
 }
 
-void d912pxy_upload_item::UploadTarget(ID3D12Resource * res, UINT64 dofs, UINT64 sz, void* src, ID3D12GraphicsCommandList * cl)
+void d912pxy_upload_item::UploadTarget(ID3D12Resource * res, UINT dofs, UINT sz, void* src, ID3D12GraphicsCommandList * cl)
 {
 	UploadTargetWithOffset(res, 0, dofs, sz, src, cl);
 }
 
-intptr_t d912pxy_upload_item::DPtr()
+UINT64 d912pxy_upload_item::DPtr()
 {
 	//d912pxy_s.dx12.dev->MakeResident(1, (ID3D12Pageable**)&mRes);
 
 	return (mappedMemWofs);
 }
 
-intptr_t d912pxy_upload_item::DPtrOffset(UINT64 offset)
+UINT64 d912pxy_upload_item::DPtrOffset(UINT64 offset)
 {
 	return mappedMemWofs + offset;
 }
 
-void d912pxy_upload_item::Reconstruct(void* mem, UINT64 rowPitch, UINT64 height, UINT64 size, UINT64 upload_offset, const D3D12_RANGE * wofs)
+void d912pxy_upload_item::Reconstruct(void* mem, UINT rowPitch, UINT height, UINT size, UINT64 upload_offset, const D3D12_RANGE * wofs)
 {
-	intptr_t bufferRef = (intptr_t)DPtrOffset(upload_offset);
+	UINT64 bufferRef = (UINT64)DPtrOffset(upload_offset);
 	intptr_t srcm = (intptr_t)mem;
 		
 	//megai2: well..

@@ -32,7 +32,7 @@ void d912pxy_device::Init(IDirect3DDevice9* dev, void* par)
 	
 	d912pxy_s.com.Init();
 	
-	UINT64 pow2sizes[PXY_INNER_MAX_POW2_ALLOC_POW - PXY_INNER_MIN_POW2_ALLOC_POW];
+	UINT pow2sizes[PXY_INNER_MAX_POW2_ALLOC_POW - PXY_INNER_MIN_POW2_ALLOC_POW];
 
 	for (int i = PXY_INNER_MIN_POW2_ALLOC_POW; i != PXY_INNER_MAX_POW2_ALLOC_POW; ++i)
 	{

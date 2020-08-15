@@ -31,11 +31,11 @@ public:
 	d912pxy_vfs_entry(UINT id);
 	~d912pxy_vfs_entry();
 
-	UINT64 IsPresentH(UINT64 fnHash);
-	void* GetFileDataH(UINT64 namehash, UINT64* sz);
+	UINT64 IsPresentH(UINT fnHash);
+	void* GetFileDataH(UINT namehash, UINT* sz);
 
-	void WriteFileH(UINT64 namehash, void* data, UINT64 sz);
-	void ReWriteFileH(UINT64 namehash, void* data, UINT64 sz);
+	void WriteFileH(UINT namehash, void* data, UINT sz);
+	void ReWriteFileH(UINT namehash, void* data, UINT sz);
 
 	void AddFileInfo(d912pxy_vfs_pck_chunk* fileInfo);
 	void LoadFileFromDisk(d912pxy_vfs_pck_chunk* fileInfo);

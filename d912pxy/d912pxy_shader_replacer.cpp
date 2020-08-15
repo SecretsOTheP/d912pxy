@@ -46,7 +46,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL_CS(const wchar_t* b
 	wchar_t replFn[1024];
 
 	//megai2: %016llX bugged out
-	wsprintf(replFn, L"%s/%08lX%08lX.hlsl", bfolder, mUID >> 32, mUID & 0xFFFFFFFF);
+	wsprintf(replFn, L"%s/%04lX%04lX.hlsl", bfolder, mUID >> 24, mUID & 0xFFFF);
 
 	char targetCompiler[] = "cs_5_1";
 
@@ -105,7 +105,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL(const wchar_t* bfol
 	wchar_t replFn[1024];
 
 	//megai2: %016llX bugged out
-	wsprintf(replFn, L"%s/%08lX%08lX.hlsl", bfolder, mUID >> 32, mUID & 0xFFFFFFFF);
+	wsprintf(replFn, L"%s/%08lX%08lX.hlsl", bfolder, mUID >> 24, mUID & 0xFFFF);
 
 	char targetCompiler[] = "ps_5_1";
 
@@ -172,7 +172,7 @@ d912pxy_shader_code d912pxy_shader_replacer::CompileFromHLSL_MEM(const wchar_t* 
 	char replFn[1024];
 
 	//megai2: %016llX bugged out
-	sprintf(replFn, "%S/%016llX.hlsl", bfolder, mUID);
+	sprintf(replFn, "%S/%I32X.hlsl", bfolder, mUID);
 
 	char targetCompiler[] = "ps_5_1";
 
@@ -259,7 +259,7 @@ d912pxy_hlsl_generator_memout* d912pxy_shader_replacer::GenerateHLSL(const wchar
 	d912pxy_hlsl_generator_memout* ret = 0;
 
 	wchar_t replFn[4096];
-	wsprintf(replFn, L"%s/%08lX%08lX.hlsl", bfolder, (UINT32)(mUID >> 32), (UINT32)(mUID & 0xFFFFFFFF));
+	wsprintf(replFn, L"%s/%04lX%04lX.hlsl", bfolder, (UINT32)(mUID >> 24), (UINT32)(mUID & 0xFFFF));
 
 	d912pxy_hlsl_generator* gen = new d912pxy_hlsl_generator(oCode, oLen, replFn, mUID);
 
@@ -268,7 +268,7 @@ d912pxy_hlsl_generator_memout* d912pxy_shader_replacer::GenerateHLSL(const wchar
 	}
 	catch (...)
 	{		
-		wsprintf(replFn, L"%s/%08lX%08lX.dxbc", bfolder, (UINT32)(mUID >> 32), (UINT32)(mUID & 0xFFFFFFFF));
+		wsprintf(replFn, L"%s/%04lX%04lX.dxbc", bfolder, (UINT32)(mUID >> 24), (UINT32)(mUID & 0xFFFF));
 		LOG_ERR_DTDM("hlsl generator failed, dumping original bytecode to %s", replFn);
 
 		FILE* dumpFile = _wfopen(replFn, L"wb+");
@@ -309,7 +309,7 @@ d912pxy_shader_code d912pxy_shader_replacer::GetCode()
 			if (!ret.code)
 			{
 				wchar_t replFn[4096];
-				wsprintf(replFn, L"%s/err_%08lX%08lX.hlsl", d912pxy_helper::GetFilePath(FP_SHADER_DB_HLSL_DIR)->w, (UINT32)(mUID >> 32), (UINT32)(mUID & 0xFFFFFFFF));
+				wsprintf(replFn, L"%s/err_%04lX%04lX.hlsl", d912pxy_helper::GetFilePath(FP_SHADER_DB_HLSL_DIR)->w, (UINT32)(mUID >> 24), (UINT32)(mUID & 0xFFFF));
 
 				LOG_ERR_DTDM("Can't compile generated shader, dumping HLSL code to %s", replFn);				
 

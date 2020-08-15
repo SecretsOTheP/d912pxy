@@ -51,13 +51,13 @@ d912pxy_vfs_entry::~d912pxy_vfs_entry()
 	delete chunkTree;
 }
 
-UINT64 d912pxy_vfs_entry::IsPresentH(UINT64 fnHash)
+UINT64 d912pxy_vfs_entry::IsPresentH(UINT fnHash)
 {
-	chunkTree->PointAtMem(&fnHash, 8);
+	chunkTree->PointAtMem(&fnHash, 4);
 	return chunkTree->CurrentCID();
 }
 
-void * d912pxy_vfs_entry::GetFileDataH(UINT64 namehash, UINT64 * sz)
+void * d912pxy_vfs_entry::GetFileDataH(UINT namehash, UINT * sz)
 {
 	d912pxy_vfs_pck_chunk* dtCh = (d912pxy_vfs_pck_chunk*)IsPresentH(namehash);
 
@@ -79,7 +79,7 @@ void * d912pxy_vfs_entry::GetFileDataH(UINT64 namehash, UINT64 * sz)
 	return &dtCh->data.rawData;
 }
 
-void d912pxy_vfs_entry::WriteFileH(UINT64 namehash, void * data, UINT64 sz)
+void d912pxy_vfs_entry::WriteFileH(UINT namehash, void * data, UINT sz)
 {
 	d912pxy_vfs_pck_chunk* dtCh = (d912pxy_vfs_pck_chunk*)IsPresentH(namehash);
 
@@ -88,7 +88,7 @@ void d912pxy_vfs_entry::WriteFileH(UINT64 namehash, void * data, UINT64 sz)
 	chunkTree->SetValue((UINT64)dtCh);
 }
 
-void d912pxy_vfs_entry::ReWriteFileH(UINT64 namehash, void * data, UINT64 sz)
+void d912pxy_vfs_entry::ReWriteFileH(UINT namehash, void * data, UINT sz)
 {
 	WriteFileH(namehash, data, sz);
 }
@@ -105,7 +105,7 @@ void d912pxy_vfs_entry::AddFileInfo(d912pxy_vfs_pck_chunk * fileInfo)
 
 	fileInfo->parent->ModRef(1);
 
-	chunkTree->SetValue((UINT64)fileInfo);
+	chunkTree->SetValue((UINT)fileInfo);
 }
 
 void d912pxy_vfs_entry::LoadFileFromDisk(d912pxy_vfs_pck_chunk * fiCh)

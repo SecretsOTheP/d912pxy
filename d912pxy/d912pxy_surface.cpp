@@ -247,7 +247,7 @@ void d912pxy_surface::initInternalBuf()
 	mem_perPixel = d912pxy_helper::BitsPerPixel(m_fmt)/8;
 }
 
-size_t d912pxy_surface::GetFootprintMemSz()
+UINT64 d912pxy_surface::GetFootprintMemSz()
 {
 	size_t ret = 0;
 
@@ -263,7 +263,7 @@ size_t d912pxy_surface::GetFootprintMemSz()
 	return ret;
 }
 
-size_t d912pxy_surface::GetFootprintMemSzRaw()
+UINT64 d912pxy_surface::GetFootprintMemSzRaw()
 {
 	if (surf_dx9dsc.Format == D3DFMT_NULL)
 		return 0;
@@ -343,7 +343,7 @@ void d912pxy_surface::DelayedLoad(void* mem, UINT lv)
 
 	if (!ul[lv].item)
 	{
-		UINT64 ul_memory_space = d912pxy_helper::AlignValueByPow2(subresFootprints[lv].Footprint.RowPitch*blockHeight, D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT);
+		UINT ul_memory_space = d912pxy_helper::AlignValueByPow2((UINT64)subresFootprints[lv].Footprint.RowPitch*blockHeight, D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT);
 
 		ul[lv].item = d912pxy_s.thread.texld.GetUploadMem(
 			(UINT32)ul_memory_space);

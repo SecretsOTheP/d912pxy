@@ -49,12 +49,12 @@ public:
 
 	void UnInit();
 
-	UINT64 GetPageSize();
+	UINT GetPageSize();
 
 	void ReleaseReservedVARange(intptr_t base);
-	void CommitVARange(intptr_t base, UINT64 size);
-	void DeCommitVARange(intptr_t base, UINT64 size);
-	intptr_t ReserveVARangeAligned(UINT64 pow2shift, UINT64 addedSize);
+	void CommitVARange(intptr_t base, UINT size);
+	void DeCommitVARange(intptr_t base, UINT size);
+	intptr_t ReserveVARangeAligned(UINT pow2shift, UINT addedSize);
 
 	bool pxy_malloc_dbg(void** cp, size_t sz, const char* file, const int line, const char* function); 
 	bool pxy_realloc_dbg(void** cp, size_t sz, const char* file, const int line, const char* function); 

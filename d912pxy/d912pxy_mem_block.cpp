@@ -24,26 +24,26 @@ SOFTWARE.
 */
 #include "stdafx.h"
 
-d912pxy_mem_block d912pxy_mem_block::use(void * ptr, UINT64 size)
+d912pxy_mem_block d912pxy_mem_block::use(void * ptr, UINT size)
 {
 	return d912pxy_mem_block(ptr, size);
 }
 
-d912pxy_mem_block d912pxy_mem_block::alloc(UINT64 size)
+d912pxy_mem_block d912pxy_mem_block::alloc(UINT size)
 {
 	void* newMem;
 	PXY_MALLOC(newMem, size, void*);
 	return d912pxy_mem_block(newMem, size);
 }
 
-d912pxy_mem_block d912pxy_mem_block::allocZero(UINT64 size)
+d912pxy_mem_block d912pxy_mem_block::allocZero(UINT size)
 {
 	auto ret = d912pxy_mem_block::alloc(size);
 	ret.FillZero();
 	return ret;
 }
 
-d912pxy_mem_block d912pxy_mem_block::from(void * ptr, UINT64 size)
+d912pxy_mem_block d912pxy_mem_block::from(void * ptr, UINT size)
 {
 	if (!ptr)
 		return d912pxy_mem_block(nullptr, 0);
@@ -55,7 +55,7 @@ d912pxy_mem_block d912pxy_mem_block::from(void * ptr, UINT64 size)
 	return ret;
 }
 
-d912pxy_mem_block::d912pxy_mem_block(void * ptr, UINT64 size) :
+d912pxy_mem_block::d912pxy_mem_block(void * ptr, UINT size) :
 	iPtr(ptr),
 	iSz(size)
 {	

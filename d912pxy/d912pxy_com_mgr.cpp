@@ -40,9 +40,9 @@ void d912pxy_com_mgr::Init()
 
 	d912pxy_com_route_init_default();
 
-	UINT64 addedSize = 8;
+	UINT addedSize = 4;
 
-	UINT64 va_objSizes[] = {
+	UINT va_objSizes[] = {
 		sizeof(d912pxy_vstream) + addedSize,
 		sizeof(d912pxy_surface) + addedSize,
 		sizeof(d912pxy_query) + addedSize,

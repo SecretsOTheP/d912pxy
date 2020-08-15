@@ -105,7 +105,7 @@ void d912pxy_vfs::LoadVFS()
 
 bool d912pxy_vfs::ReadFile(d912pxy_vfs_path path, d912pxy_mem_block to)
 {
-	UINT64 sz;
+	UINT sz;
 	void* ptr = GetBidLocked(path)->GetFileDataH(path.pathHash(), &sz);
 
 	if (ptr == nullptr)
@@ -121,7 +121,7 @@ bool d912pxy_vfs::ReadFile(d912pxy_vfs_path path, d912pxy_mem_block to)
 
 d912pxy_mem_block d912pxy_vfs::ReadFile(d912pxy_vfs_path path)
 {
-	UINT64 sz;
+	UINT sz;
 	void* ptr = GetBidLocked(path)->GetFileDataH(path.pathHash(), &sz);
 	
 	return d912pxy_mem_block::from(ptr, sz);
@@ -173,7 +173,7 @@ d912pxy_vfs_locked_entry d912pxy_vfs::GetBidLocked(d912pxy_vfs_bid bid)
 	return d912pxy_vfs_locked_entry(bid, items);
 }
 
-d912pxy_vfs_pck_chunk * d912pxy_vfs::WriteFileToPck(d912pxy_vfs_pck_chunk* prevChunk, UINT id, UINT64 namehash, void * data, UINT sz)
+d912pxy_vfs_pck_chunk * d912pxy_vfs::WriteFileToPck(d912pxy_vfs_pck_chunk* prevChunk, UINT id, UINT namehash, void * data, UINT sz)
 {
 	if (prevChunk)
 	{
@@ -302,7 +302,7 @@ void d912pxy_vfs::LoadPckFromRootPath()
 d912pxy_vfs_path_hash d912pxy_vfs_path::HashFromName(const char * fnpath)
 {
 	UINT len = (UINT32)strlen(fnpath);
-	d912pxy_vfs_path_hash ret = d912pxy_memtree2::memHash64s((void*)fnpath, len);
+	d912pxy_vfs_path_hash ret = d912pxy_memtree2::memHash32s((void*)fnpath, len);
 
 	auto checkPath = d912pxy_vfs_path(ret, d912pxy_vfs_bid::vfs_paths);
 	if (d912pxy_s.vfs.IsFilePresent(checkPath))

@@ -64,7 +64,7 @@ void d912pxy_shader_db::UnInit()
 
 d912pxy_shader_uid d912pxy_shader_db::GetUID(DWORD * code, UINT32* len)
 {
-	UINT64 hash = 0xcbf29ce484222325;
+	UINT hash = 0x811c9dc5;
 	UINT ctr = 0;
 
 	while (code[ctr >> 2] != 0x0000FFFF)
@@ -72,7 +72,7 @@ d912pxy_shader_uid d912pxy_shader_db::GetUID(DWORD * code, UINT32* len)
 		UINT8 dataByte = ((UINT8*)code)[ctr];
 
 		hash = hash ^ dataByte;
-		hash = hash * 1099511628211;
+		hash = hash * 0x01000193;
 		++ctr;
 	}
 

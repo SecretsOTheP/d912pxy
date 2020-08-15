@@ -81,7 +81,7 @@ void d912pxy_mem_mgr::UnInit()
 		d912pxy_s(memMgr) = NULL;*/
 }
 
-UINT64 d912pxy_mem_mgr::GetPageSize()
+UINT d912pxy_mem_mgr::GetPageSize()
 {
 	return sysinf.dwPageSize;
 }
@@ -91,7 +91,7 @@ void d912pxy_mem_mgr::ReleaseReservedVARange(intptr_t base)
 	VirtualFree((void*)base, 0, MEM_RELEASE);
 }
 
-void d912pxy_mem_mgr::CommitVARange(intptr_t base, UINT64 size)
+void d912pxy_mem_mgr::CommitVARange(intptr_t base, UINT size)
 {
 #ifdef _DEBUG
 	memVAUsed += size;
@@ -103,7 +103,7 @@ void d912pxy_mem_mgr::CommitVARange(intptr_t base, UINT64 size)
 	}
 }
 
-void d912pxy_mem_mgr::DeCommitVARange(intptr_t base, UINT64 size)
+void d912pxy_mem_mgr::DeCommitVARange(intptr_t base, UINT size)
 {
 #ifdef _DEBUG
 	memVAUsed -= size;
@@ -115,7 +115,7 @@ void d912pxy_mem_mgr::DeCommitVARange(intptr_t base, UINT64 size)
 	}
 }
 
-intptr_t d912pxy_mem_mgr::ReserveVARangeAligned(UINT64 pow2shift, UINT64 addedSize)
+intptr_t d912pxy_mem_mgr::ReserveVARangeAligned(UINT pow2shift, UINT addedSize)
 {
 	intptr_t incBase = 1ULL << pow2shift;
 

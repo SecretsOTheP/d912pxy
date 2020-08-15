@@ -231,8 +231,8 @@ void d912pxy_vstream::ProcessUpload(d912pxy_vstream_lock_data* linfo, ID3D12Grap
 		d912pxy_s.thread.bufld.AddToFinishList(this);		
 	}
 	
-	UINT64 blockStart = linfo->offset;
-	UINT64 blockSize = linfo->size;
+	UINT blockStart = linfo->offset;
+	UINT blockSize = linfo->size;
 			
 	//megai2: keep barriers here to prevent GPU side copy collision on double writed areas
 	BTransitTo(0, D3D12_RESOURCE_STATE_COPY_DEST, cl);

@@ -43,7 +43,7 @@ public:
 		ZeroMemory(iPtr, iSz);
 	};
 
-	UINT64 size()
+	UINT size()
 	{
 		return iSz;
 	}
@@ -92,17 +92,17 @@ public:
 		return ret;
 	}
 
-	static d912pxy_mem_block use(void* ptr, UINT64 size);
-	static d912pxy_mem_block alloc(UINT64 size);
-	static d912pxy_mem_block allocZero(UINT64 size);
-	static d912pxy_mem_block from(void* ptr, UINT64 size);
+	static d912pxy_mem_block use(void* ptr, UINT size);
+	static d912pxy_mem_block alloc(UINT size);
+	static d912pxy_mem_block allocZero(UINT size);
+	static d912pxy_mem_block from(void* ptr, UINT size);
 	static d912pxy_mem_block null() {
 		return d912pxy_mem_block(nullptr, 0);
 	}
 
 protected:	
-	d912pxy_mem_block(void* ptr, UINT64 size);
+	d912pxy_mem_block(void* ptr, UINT size);
 
 	void* iPtr;
-	UINT64 iSz;
+	size_t iSz;
 };

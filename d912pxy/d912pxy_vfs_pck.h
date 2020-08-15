@@ -70,7 +70,7 @@ typedef struct d912pxy_vfs_pck_chunk_chunk_index {
 
 typedef struct d912pxy_vfs_pck_chunk_file_info {
 	UINT8 category;
-	UINT64 name;
+	UINT32 name;
 	UINT32 dataChunk;
 	UINT32 dataCheckSum;	
 } d912pxy_vfs_pck_chunk_file_info;
@@ -120,7 +120,7 @@ public:
 
 	UINT Close(UINT compress);
 
-	d912pxy_vfs_pck_chunk* WriteFileToPck(UINT8 cat, UINT64 name, UINT32 size, void* data);
+	d912pxy_vfs_pck_chunk* WriteFileToPck(UINT8 cat, UINT name, UINT32 size, void* data);
 	d912pxy_vfs_pck_chunk* ReadFileFromPck(d912pxy_vfs_pck_chunk* file);
 	UINT UpdateChunk(d912pxy_vfs_pck_chunk* chunk);
 

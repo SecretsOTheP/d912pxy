@@ -93,7 +93,7 @@ public:
 private:	
 	d912pxy_swap_list<d912pxy_cbuffer> cData;
 	
-	intptr_t dataPtr;	
+	UINT64 dataPtr;	
 };
 
 template<class base_element, class sub_element>

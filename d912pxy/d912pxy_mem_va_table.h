@@ -30,13 +30,13 @@ SOFTWARE.
 
 typedef struct d912pxy_mem_va_table_entry
 {
-	UINT64 itemSize;
+	UINT itemSize;
 	d912pxy_mem_va_table_obj_id* stackBase;
 	d912pxy_mem_va_table_obj_id* stackPtr;
 	d912pxy_mem_va_table_obj_id* stackLimit;
 	d912pxy_mem_va_table_ref_counter* refBase;
-	UINT64 refCount;
-	UINT64 allocGrain;	
+	UINT refCount;
+	UINT allocGrain;	
 } d912pxy_mem_va_table_entry;
 
 #define PXY_INNER_MAX_VA_TABLE_ENTRYS 32
@@ -50,29 +50,29 @@ public:
 	d912pxy_mem_va_table();
 	~d912pxy_mem_va_table();
 
-	void Init(UINT64* objSizes, UINT64 allocBitSize, UINT64 entryCount);
+	void Init(UINT32* objSizes, UINT32 allocBitSize, UINT32 entryCount);
 	void DeInit();
 
-	void* AllocateObjPow2(UINT64 size);
-	void* AllocateObj(UINT64 type);
+	void* AllocateObjPow2(UINT32 size);
+	void* AllocateObj(UINT32 type);
 	void DeAllocateObj(void* obj);
 
-	UINT64 TypeFromAdr(void* obj);
+	UINT TypeFromAdr(void* obj);
 	d912pxy_mem_va_table_obj_id ObjIdFromAdr(void* obj);
-	d912pxy_mem_va_table_obj_id ObjIdFromAdr2(void* obj, UINT64 type);
+	d912pxy_mem_va_table_obj_id ObjIdFromAdr2(void* obj, UINT32 type);
 
-	void* GetObj(UINT64 type, d912pxy_mem_va_table_obj_id id);
+	void* GetObj(UINT type, d912pxy_mem_va_table_obj_id id);
 
 	intptr_t GetBaseAdr();
 
 private:
 	intptr_t baseAdr;
-	UINT64 m_entryCount;
-	UINT64 entryShift;
-	UINT64 entryBase;
-	UINT64 baseMask;
-	UINT64 objShift;
-	UINT64 objMask;	
+	UINT m_entryCount;
+	UINT entryShift;
+	UINT entryBase;
+	UINT baseMask;
+	UINT objShift;
+	UINT objMask;	
 
 	d912pxy_mem_va_table_entry table[PXY_INNER_MAX_VA_TABLE_ENTRYS];
 	d912pxy_thread_lock lock[PXY_INNER_MAX_VA_TABLE_ENTRYS];

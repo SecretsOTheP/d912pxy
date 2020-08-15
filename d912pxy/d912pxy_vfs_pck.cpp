@@ -113,7 +113,7 @@ UINT d912pxy_vfs_pck::Close(UINT compress)
 	return 1;
 }
 
-d912pxy_vfs_pck_chunk* d912pxy_vfs_pck::WriteFileToPck(UINT8 cat, UINT64 name, UINT32 size, void * data)
+d912pxy_vfs_pck_chunk* d912pxy_vfs_pck::WriteFileToPck(UINT8 cat, UINT name, UINT32 size, void * data)
 {
 	d912pxy_vfs_pck_chunk* fiCh = AllocateChunk(CHU_FILE_INFO);
 	d912pxy_vfs_pck_chunk* dtCh = AllocateDataChunk(CHU_FILE_DATA, size, 1);

@@ -82,7 +82,7 @@ static const d912pxy_dynamic_import_entry d912pxy_dynamic_import_funcs[] = {
 
 typedef HRESULT(WINAPI *pD3DCompile_47)
 (LPCVOID                         pSrcData,
-	SIZE_T                          SrcDataSize,
+	size_t                          SrcDataSize,
 	LPCSTR                          pFileName,
 	CONST D3D_SHADER_MACRO*         pDefines,
 	ID3DInclude*                    pInclude,

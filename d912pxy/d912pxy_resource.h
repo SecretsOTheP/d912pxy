@@ -31,7 +31,7 @@ class d912pxy_device;
 
 typedef struct d912pxy_resource_ptr {
 	intptr_t host;
-	intptr_t dev;
+	INT64 dev;
 } d912pxy_resource_ptr;
 
 enum d912pxy_resource_typeid {
@@ -97,7 +97,7 @@ public:
 	void BCopyTo(d912pxy_resource* dst, UINT barriers, ID3D12GraphicsCommandList* cq);
 	void BCopyToWStates(d912pxy_resource* dst, UINT barriers, ID3D12GraphicsCommandList* cq, D3D12_RESOURCE_STATES dstStateCache, D3D12_RESOURCE_STATES srcStateCache);
 		
-	intptr_t GetVA_GPU();
+	UINT64 GetVA_GPU();
 	void GetCopyableFootprints(UINT subres, D3D12_PLACED_SUBRESOURCE_FOOTPRINT* ret);
 
 	static UINT residencyOverride;

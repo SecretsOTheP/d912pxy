@@ -513,9 +513,9 @@ char * d912pxy_helper::StrNextLine(char * buffer)
 	return itr + 1;
 }
 
-UINT64 d912pxy_helper::GetClosestPow2(UINT64 size)
+UINT d912pxy_helper::GetClosestPow2(UINT size)
 {
-	UINT64 pow2 = 1;
+	UINT pow2 = 1;
 
 	for (int i = 0; i != 64; ++i)
 	{
@@ -533,9 +533,9 @@ UINT64 d912pxy_helper::GetClosestPow2(UINT64 size)
 	return 63;
 }
 
-UINT64 d912pxy_helper::AlignValueByPow2(UINT64 val, UINT64 pow2val)
+UINT d912pxy_helper::AlignValueByPow2(UINT val, UINT pow2val)
 {
-	UINT64 mask = (pow2val - 1);
+	UINT mask = (pow2val - 1);
 	if (val & mask)
 		return (val & ~mask) + pow2val;
 	else

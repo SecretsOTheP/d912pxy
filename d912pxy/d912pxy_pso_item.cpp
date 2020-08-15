@@ -102,7 +102,7 @@ void d912pxy_pso_item::CreatePSO(D3D12_GRAPHICS_PIPELINE_STATE_DESC* fullDesc)
 			entryData.pso = desc->GetKey();
 
 			char fullPsoName[255];
-			sprintf(fullPsoName, "%016llX_%016llX_%08lX", entryData.vs, entryData.ps, entryData.pso);
+			sprintf(fullPsoName, "%016uX_%016uX_%08uX", entryData.vs, entryData.ps, entryData.pso);
 
 			auto cacheFn = d912pxy_vfs_path(fullPsoName, d912pxy_vfs_bid::pso_precompile_list);
 
@@ -204,7 +204,7 @@ void d912pxy_pso_item::RCELoadIOBlock(char* source, const char* marker, char** o
 		char* lnStart = structDclEmt;
 		structDclEmt = d912pxy_helper::StrNextLine(structDclEmt);
 
-		UINT64 lSz = (intptr_t)structDclEmt - (intptr_t)lnStart;
+		UINT lSz = (intptr_t)structDclEmt - (intptr_t)lnStart;
 
 		PXY_MALLOC(out[outCnt], lSz + 1, char*);
 
@@ -396,7 +396,7 @@ void d912pxy_pso_item::RealtimeIntegrityCheck(D3D12_GRAPHICS_PIPELINE_STATE_DESC
 	d912pxy_shader_pair_hash_type pairUID = desc->GetShaderPairUID();
 	UINT32 psoKey = desc->GetKey();
 	char derivedAlias[255];
-	sprintf(derivedAlias, "%016llX_%08lX", pairUID, psoKey);
+	sprintf(derivedAlias, "%016uX_%08uX", pairUID, psoKey);
 
 	LOG_DBG_DTDM("DX9 PSO realtime check emulation for alias %s", derivedAlias);
 
