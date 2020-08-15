@@ -7,8 +7,11 @@ You can try to use it with other games; it might work.
 
 Expect some minor crashes / visual bugs.
 
-[![Current Version](https://img.shields.io/github/release/megai2/d912pxy)](https://github.com/megai2/d912pxy/releases) [![Github All Releases](https://img.shields.io/github/downloads/megai2/d912pxy/total.svg)]()  [![Build status](https://ci.appveyor.com/api/projects/status/gs8drlb0goyp6h28?svg=true)](https://ci.appveyor.com/project/megai2/d912pxy)
-[![](https://img.shields.io/discord/384735285197537290.svg?logo=discord&logoColor=f0f0f0)](https://discord.gg/fY9KADf)
+[![Current Version](https://img.shields.io/github/release/megai2/d912pxy)](https://github.com/megai2/d912pxy/releases) 
+[![Github Downloads](https://img.shields.io/github/downloads/megai2/d912pxy/total.svg)](https://github.com/megai2/d912pxy/releases) 
+[![Build status](https://ci.appveyor.com/api/projects/status/gs8drlb0goyp6h28?svg=true)](https://ci.appveyor.com/project/megai2/d912pxy) 
+[![Discord](https://img.shields.io/discord/384735285197537290.svg?logo=discord&logoColor=f0f0f0)](https://discord.gg/fY9KADf) 
+[![Patreon](https://img.shields.io/badge/Patreon-Support_the_development-red?logo=patreon&logoColor=f0f0f0)](https://www.patreon.com/d912pxy) 
 
 **WARNING: USE OF THIS SOFTWARE IS ENTIRELY AT YOUR OWN RISK!**
 
@@ -76,6 +79,17 @@ Translated guides:
 [**FR**](https://www.youtube.com/watch?v=hfSSIBICG6E)
 
 [**CN**](https://hackmd.io/vXa_ukUpQaOaLRBDdXdMLA)
+
+Video guides:
+
+[Guildwars 2 - DX12 Full Setup Guide (912pxy mod)](https://www.youtube.com/watch?v=AhtJA9B55tU)
+
+[Guild Wars 2: How to increase your FPS in 2020](https://www.youtube.com/watch?v=vsJyQKAa8FA)
+
+[How to chainload ArcDPS and d912pxy for Guild Wars 2](https://www.youtube.com/watch?v=0jwbDpzuv3k)
+
+[BnS DirectX12 Mod Installation Guide - B&S Reddit IQ safe(Windows 10)](https://www.youtube.com/watch?v=QkEX4Mgxnv8)
+
 
 # Known bugs
 

@@ -63,10 +63,12 @@ typedef enum d912pxy_config_value {
 	PXY_CFG_UPLOAD_TEX_ASYNC,	
 	PXY_CFG_BATCHING_FORCE_NEW_BATCH,
 	PXY_CFG_BATCHING_RAW_GPUW,
-	PXY_CFG_MISC_GPU_TIMEOUT,
+	PXY_CFG_BATCHING_MAX_WRITES_PER_BATCH,
+	PXY_CFG_BATCHING_MAX_BATCHES_PER_IFRAME,
 	PXY_CFG_DX_DBG_RUNTIME,
-	PXY_CFG_MISC_USE_DX9,
-	PXY_CFG_MISC_DRAW_UP_BUFFER_LENGTH,
+	PXY_CFG_DX_FRAME_LATENCY,
+	PXY_CFG_DX_ROUTE_TO_DX9,
+	PXY_CFG_MISC_GPU_TIMEOUT,		
 	PXY_CFG_MISC_NV_DISABLE_THROTTLE,	
 	PXY_CFG_COMPAT_OCCLUSION,
 	PXY_CFG_COMPAT_OCCLUSION_OPT_CONSTRUCTOR,
@@ -177,10 +179,35 @@ private:
 		{L"upload",L"tex_async",L"0"},//PXY_CFG_UPLOAD_TEX_ASYNC
 		{L"batching",L"force_new",L"0"},//PXY_CFG_BATCHING_FORCE_NEW_BATCH
 		{L"batching",L"raw_gpuw",L"0"},//PXY_CFG_BATCHING_RAW_GPUW		
+		{
+			L"batching",
+			L"maxWritesPerBatch",
+			L"128",
+			L"u r:10,+inf",
+			L"max GPU writes in one batch",
+			L"space that is allocated for GPU writes in batch buffer, affect RAM usage, low values can create crashes",
+			nullptr
+		},//PXY_CFG_BATCHING_MAX_WRITES_PER_BATCH,
+		{
+			L"batching",
+			L"maxBatchesPerIFrame",
+			L"8192",
+			L"u r:5,+inf",
+			L"max batches in internal frame",
+			L"limit of batches in internal frame, affects RAM&VRAM usage, low values reduce performance, high values improve performance in heavy loaded scenes",
+			nullptr
+		},//PXY_CFG_BATCHING_MAX_BATCHES_PER_IFRAME,
+		{L"dx",L"debug",L"0"},//PXY_CFG_DX_DBG_RUNTIME
+		{
+			L"dx",
+			L"dxgi_frame_latency",
+			L"0",
+			L"u r:0,3",
+			L"enables and configures dxgi frame latency feature",
+			L"0 disables swapchain waits, any other value enables swapchain waits and trying to set this value as max frame latency"
+		},//PXY_CFG_DX_FRAME_LATENCY
+		{L"dx",L"route_to_dx9",L"0"},//PXY_CFG_DX_ROUTE_TO_DX9		
 		{L"misc",L"gpu_timeout",L"5000"},//PXY_CFG_MISC_GPU_TIMEOUT
-		{L"misc",L"dx_debug",L"0"},//PXY_CFG_DX_DBG_RUNTIME
-		{L"misc",L"use_dx9",L"0"},//PXY_CFG_MISC_USE_DX9
-		{L"misc",L"draw_up_buffer_length", L"FFFF"},//PXY_CFG_MISC_DRAW_UP_BUFFER_LENGTH
 		{L"misc",L"nv_disable_throttle", L"0"},//PXY_CFG_MISC_NV_DISABLE_THROTTLE		
 		{L"compat",L"occlusion",L"2"},//PXY_CFG_COMPAT_OCCLUSION
 		{L"compat",L"occlusion_opt_ctor",L"0"},//PXY_CFG_COMPAT_OCCLUSION_OPT_CONSTRUCTOR

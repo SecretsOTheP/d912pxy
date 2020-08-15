@@ -62,6 +62,7 @@ namespace d912pxy_helper {
 
 	char* StrGetCurrentLineStart(char* buffer);
 	char* StrNextLine(char* buffer);
+	bool StrCutLastElementInPath(char* fn);
 
 	UINT GetClosestPow2(UINT size);
 

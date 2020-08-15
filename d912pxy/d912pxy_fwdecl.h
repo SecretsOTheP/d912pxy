@@ -32,6 +32,7 @@ SOFTWARE.
 #define D3DRS_D912PXY_GPU_WRITE (D3DRENDERSTATETYPE)223
 #define D3DRS_D912PXY_DRAW (D3DRENDERSTATETYPE)224
 #define D3DRS_D912PXY_SAMPLER_ID (D3DRENDERSTATETYPE)225
+#define D3DRS_D912PXY_CUSTOM_BATCH_DATA (D3DRENDERSTATETYPE)226
 
 #define D3DDECLMETHOD_PER_VERTEX_CONSTANT 8
 #define D3DDECLMETHOD_PER_INSTANCE_CONSTANT 16
@@ -43,6 +44,12 @@ SOFTWARE.
 #define D912PXY_GPU_WRITE_OFFSET_SAMPLER 8 
 #define D912PXY_GPU_WRITE_OFFSET_VS_VARS 16
 #define D912PXY_GPU_WRITE_OFFSET_PS_VARS 16 + 256
+
+struct d912pxy_custom_batch_data
+{
+	IDirect3DVertexBuffer9* buffer;
+	int index;
+};
 
 //configuration switches =======================
 
@@ -85,7 +92,6 @@ SOFTWARE.
 #define PXY_INNER_MAX_VBUF_STREAMS 10
 #define PXY_INNER_MAX_IFRAME_CLEANUPS 1024*1024
 #define PXY_INNER_MAX_CLEANUPS_PER_SYNC 128
-#define PXY_INNER_MAX_IFRAME_BATCH_COUNT 1024*8
 #define PXY_INNER_MAX_IFRAME_PSO_CACHES 4096
 #define PXY_INNER_MAX_CACHE_NODES_SAMPLERS 4096
 #define PXY_INNER_MAX_TEXSTATE_CACHE_NODES 0xFFFFF
@@ -255,9 +261,15 @@ typedef enum d912pxy_file_path_id {
 	FP_NO_PATH
 } d912pxy_file_path_id;
 
-typedef struct d912pxy_file_path {
-	const char* s;
-	const wchar_t* w;
+typedef union d912pxy_file_path {
+	struct {
+		const char* s;
+		const wchar_t* w;
+	};
+	struct {
+		char* ds;
+		wchar_t* dw;
+	};
 } d912pxy_file_path;
 
 #define FP_DEF(a) {a, L##a }
@@ -307,6 +319,30 @@ static const d912pxy_file_path d912pxy_file_paths_addon[] = {
 	FP_DEF("./addons/"),
 	FP_DEF("./addons/d912pxy/imgui.ini"),
 	FP_DEF("./addons/d912pxy/imgui.log"),
+	FP_DEF("")
+};
+
+static const d912pxy_file_path d912pxy_file_paths_abs_rh[] = {
+	FP_DEF("d912pxy/shaders/cs"),
+	FP_DEF("cs/cso"),
+	FP_DEF("d912pxy/shaders/hlsl"),
+	FP_DEF("d912pxy/pck/pid.lock"),
+	FP_DEF("vfs_archive"),
+	FP_DEF("addons/d912pxy/shaders/hlsl/custom"),
+	FP_DEF("shaders/cso"),
+	FP_DEF("shaders/bugs"),
+	FP_DEF("d912pxy/crash"),
+	FP_DEF("d912pxy/log.txt"),
+	FP_DEF("d912pxy/log.1.txt"),
+	FP_DEF("d912pxy/dx12_perf_graph.html"),
+	FP_DEF("d912pxy/dx9_perf_graph.html"),
+	FP_DEF("d912pxy/dx12_perf_graph.png"),
+	FP_DEF("d912pxy/dx9_perf_graph.png"),
+	FP_DEF("d912pxy/config.ini"),
+	FP_DEF("d912pxy/12on7/"),
+	FP_DEF(""),
+	FP_DEF("d912pxy/imgui.ini"),
+	FP_DEF("d912pxy/imgui.log"),
 	FP_DEF("")
 };
 
